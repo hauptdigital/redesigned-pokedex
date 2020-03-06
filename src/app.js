@@ -39,16 +39,29 @@ export function app() {
     innerText: 'Pokédex'
   });
 
+  // Search
+
+  const searchWrapper = createElement('div', {
+    className: 'searchWrapper'
+  });
+  const search = createElement('input', {
+    className: 'searchWrapper__input',
+    type: 'text'
+  });
+
+  // Search Results
+
+  const searchResultsWrapper = createElement('div', {
+    className: 'searchResultsWrapper'
+  });
+
   // Main
   const main = createElement('main', { className: 'main' });
   // Build app
 
   appendElement(header, [logo, title]);
-  //   appendElement(main, [
-  //     searchElement,
-  //     searchResultsWrapper,
-  //     favoritesSection
-  //   ]);
+  appendElement(searchWrapper, [search]);
+  appendElement(main, [searchWrapper, searchResultsWrapper]);
 
   fetchPokemons();
 
