@@ -1,9 +1,7 @@
-function component() {
-  const element = document.createElement('div');
+import './index.scss';
+import { app } from './app';
 
-  element.innerText = 'Hello, world!';
-
-  return element;
-}
-
-document.body.appendChild(component());
+const elements = app();
+elements.forEach(element => {
+  document.body.appendChild(element);
+});
