@@ -1,4 +1,4 @@
-import { createElement, appendElement, removeAllChilds } from './lib/util';
+import { createElement, appendElement } from './lib/util';
 import Logo from './assets/img/logo.png';
 
 export function app() {
@@ -54,6 +54,9 @@ export function app() {
   const searchResultsWrapper = createElement('div', {
     className: 'searchResultsWrapper'
   });
+
+  const searchQuery = 'Pikachu';
+  const data = ['Eins', 'Zwei', 'Drei', 'Pickachu'];
 
   // Main
   const main = createElement('main', { className: 'main' });
