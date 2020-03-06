@@ -1,6 +1,7 @@
-export function app() {
-  const element = document.createElement('div');
+import { createElement, appendElement, removeAllChilds } from './lib/util';
+import Logo from './assets/img/logo.png';
 
+export function app() {
   async function fetchPokemons() {
     const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=5');
     const results = await response.json();
@@ -21,13 +22,35 @@ export function app() {
     let url = pokemon.url;
     const response = await fetch(url);
     const results = await response.json();
-
     const pokemonData = results;
-
     return pokemonData;
   }
 
+  // Header
+  const header = createElement('header', {
+    className: 'header'
+  });
+  const logo = createElement('img', {
+    className: 'header__logo',
+    src: Logo
+  });
+  const title = createElement('h1', {
+    className: 'header__title',
+    innerText: 'Pokédex'
+  });
+
+  // Main
+  const main = createElement('main', { className: 'main' });
+  // Build app
+
+  appendElement(header, [logo, title]);
+  //   appendElement(main, [
+  //     searchElement,
+  //     searchResultsWrapper,
+  //     favoritesSection
+  //   ]);
+
   fetchPokemons();
 
-  return [element];
+  return [header, main];
 }
