@@ -13,7 +13,7 @@ export function app() {
       const pokemonDiv = document.createElement('div');
       pokemonDiv.innerText = pokemonData.name;
     });
-
+    console.log(pokemonData);
     return pokemonData;
   }
 
@@ -26,6 +26,8 @@ export function app() {
 
     return pokemonData;
   }
+
+  fetchPokemons();
 
   return [element];
 }
