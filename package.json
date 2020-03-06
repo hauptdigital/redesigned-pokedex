@@ -1,0 +1,29 @@
+{
+  "name": "redesigned-pokedex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "husky": "^4.2.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm test"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hauptdigital/redesigned-pokedex.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hauptdigital/redesigned-pokedex/issues"
+  },
+  "homepage": "https://github.com/hauptdigital/redesigned-pokedex#readme"
+}
