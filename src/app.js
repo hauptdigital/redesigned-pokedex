@@ -55,8 +55,12 @@ export function app() {
     className: 'searchResultsWrapper'
   });
 
-  const searchQuery = 'Pikachu';
-  const data = ['Eins', 'Zwei', 'Drei', 'Pickachu'];
+  //   const searchQuery = 'Pikachu';
+  //   const data = ['Eins', 'Zwei', 'Drei', 'Pickachu'];
+
+  //   function createSearchResults(searchQuery, data) {
+  //     data.filter(entry => {});
+  //   }
 
   // Main
   const main = createElement('main', { className: 'main' });
