@@ -1,4 +1,4 @@
-import { createElement, appendElement } from './lib/util';
+import { createElement, appendElement, removeAllChilds } from './lib/util';
 import Logo from './assets/img/logo.png';
 
 export function app() {
@@ -67,6 +67,7 @@ export function app() {
       const filteredPokemons = filterResults(searchQuery, pokemonData);
 
       // Create search results
+      removeAllChilds(searchResultsWrapper);
 
       filteredPokemons.forEach(pokemon => {
         const searchResult = createElement('div', {
@@ -74,8 +75,10 @@ export function app() {
         });
         const searchResultTitle = createElement('h2', {
           className: 'searchResultsWrapper__title',
-          innerText: pokemon
+          innerText: pokemon.name
         });
+        appendElement(searchResult, [searchResultTitle]);
+        appendElement(searchResultsWrapper, [searchResult]);
       });
     });
 
@@ -93,22 +96,7 @@ export function app() {
       if (filteredPokemons.length === 0) {
         filteredPokemons.push('No Pokémon match your search query');
       }
-      console.log(filteredPokemons);
-
-      //const pokemonNames = pokemonData.map(pokemon => {
-      //  console.log(Object.entries(pokemon));
-      //  const pokemonName = pokemon.name;
-      //  const pokemonNameCapitalized =
-      //    pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
-      //  return pokemonNameCapitalized;
-      //});
-
-      const filteredSearchResults = data
-        .filter(entry => {
-          return entry.toLowerCase().startsWith(searchQuery.toLowerCase());
-        })
-        .sort();
-      return filteredSearchResults;
+      return filteredPokemons;
     }
   }
 
