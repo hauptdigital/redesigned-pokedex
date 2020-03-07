@@ -67,6 +67,7 @@ export function app() {
     search.addEventListener('input', async event => {
       const input = event.target;
       const searchQuery = input.value;
+      console.log(searchQuery);
 
       // Get Data
       const pokemonData = await fetchPokemons();
