@@ -26,14 +26,6 @@ export function app() {
     return pokemonData;
   }
 
-  //   async function fetchPokemon(pokemon) {
-  //     let url = pokemon.url;
-  //     const response = await fetch(url);
-  //     const results = await response.json();
-  //     const pokemonData = await results;
-  //     return pokemonData;
-  //   }
-
   // Header
   const header = createElement('header', {
     className: 'header'
@@ -63,24 +55,61 @@ export function app() {
     className: 'searchResultsWrapper'
   });
 
-  async function createSearchResults(searchQuery, data) {
+  async function createSearchResults() {
     search.addEventListener('input', async event => {
       const input = event.target;
       const searchQuery = input.value;
-      console.log(searchQuery);
 
       // Get Data
       const pokemonData = await fetchPokemons();
 
-      console.log(pokemonData[0].name);
+      // Filter results
+      const filteredPokemons = filterResults(searchQuery, pokemonData);
+
+      // Create search results
+
+      filteredPokemons.forEach(pokemon => {
+        const searchResult = createElement('div', {
+          className: 'searchResultsWrapper__searchResult'
+        });
+        const searchResultTitle = createElement('h2', {
+          className: 'searchResultsWrapper__title',
+          innerText: pokemon
+        });
+      });
     });
 
-    const filteredSearchResults = data
-      .filter(entry =>
-        entry.toLowerCase().startsWith(searchQuery.toLowerCase())
-      )
-      .sort();
-    return filteredSearchResults;
+    function filterResults(searchQuery, pokemonData) {
+      // Get Pokemon names
+      console.log(pokemonData);
+
+      const filteredPokemons = [];
+      pokemonData.forEach(pokemon => {
+        const pokemonName = pokemon.name;
+        if (pokemonName.toLowerCase().startsWith(searchQuery.toLowerCase())) {
+          filteredPokemons.push(pokemon);
+        }
+      });
+      if (filteredPokemons.length === 0) {
+        filteredPokemons.push('No Pokémon match your search query');
+      }
+      console.log(filteredPokemons);
+
+      //const pokemonNames = pokemonData.map(pokemon => {
+      //  console.log(Object.entries(pokemon));
+      //  const pokemonName = pokemon.name;
+      //  const pokemonNameCapitalized =
+      //    pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
+      //  return pokemonNameCapitalized;
+      //});
+
+      const filteredSearchResults = data
+        .filter(entry => {
+          return entry.toLowerCase().startsWith(searchQuery.toLowerCase());
+        })
+        .sort();
+      return filteredSearchResults;
+    }
   }
 
   createSearchResults('', []);
