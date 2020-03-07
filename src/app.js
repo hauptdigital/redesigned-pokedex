@@ -73,18 +73,29 @@ export function app() {
         const searchResult = createElement('div', {
           className: 'searchResultsWrapper__searchResult'
         });
+        searchResult.dataset.pokemonid = pokemon.id;
         const searchResultTitle = createElement('h2', {
           className: 'searchResultsWrapper__title',
           innerText: pokemon.name
         });
-        appendElement(searchResult, [searchResultTitle]);
+        const searchResultImageWrapper = createElement('div', {
+          className: 'searchResultsWrapper__imageWrapper'
+        });
+        const searchResultImage = createElement('img', {
+          className: 'searchResultsWrapper__image',
+          src: pokemon.imagePath
+        });
+        appendElement(searchResultImageWrapper, [searchResultImage]);
+        appendElement(searchResult, [
+          searchResultTitle,
+          searchResultImageWrapper
+        ]);
         appendElement(searchResultsWrapper, [searchResult]);
       });
     });
 
     function filterResults(searchQuery, pokemonData) {
       // Get Pokemon names
-      console.log(pokemonData);
 
       const filteredPokemons = [];
       pokemonData.forEach(pokemon => {
@@ -93,14 +104,11 @@ export function app() {
           filteredPokemons.push(pokemon);
         }
       });
-      if (filteredPokemons.length === 0) {
-        filteredPokemons.push('No Pokémon match your search query');
-      }
       return filteredPokemons;
     }
   }
 
-  createSearchResults('', []);
+  createSearchResults();
 
   // Main
   const main = createElement('main', { className: 'main' });
