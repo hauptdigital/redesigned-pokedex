@@ -1,0 +1,15 @@
+@use './lib/theme.scss';
+@import url('https://fonts.googleapis.com/css?family=Roboto|Spartan:100&display=swap');
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: theme.$font-size;
+  margin: 0;
+  height: 100vh;
+}

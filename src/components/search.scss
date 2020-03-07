@@ -1,0 +1,5 @@
+@use '../lib/theme';
+
+.header {
+  background-color: theme.$secondary-bg-color;
+}
