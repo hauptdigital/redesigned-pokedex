@@ -96,6 +96,97 @@ export function app() {
       });
     });
 
+    const pokemonID = '2';
+    async function openDetailView(pokemonID) {
+      const url = 'https://pokeapi.co/api/v2/pokemon/' + pokemonID + '/';
+      const response = await fetch(url);
+      const pokemon = await response.json();
+
+      // Build detail view
+      const detailView = createElement('div', {
+        className: 'detailView'
+      });
+      const detailViewTitleBar = createElement('div', {
+        className: 'detailView__titleBar'
+      });
+      const detailViewNumber = createElement('div', {
+        className: 'detailView__number',
+        innerText: 'No. ' + pokemon.id
+      });
+      const detailViewTitle = createElement('div', {
+        className: 'detailView__title',
+        innerText: pokemon.name
+      });
+      appendElement(detailViewTitleBar, [detailViewNumber, detailViewTitle]);
+
+      const detailViewTypes = createElement('div', {
+        className: 'detailView__types',
+        innerText: 'Types: '
+      });
+
+      pokemon.types.forEach(type => {
+        const detailViewType = createElement('div', {
+          className: 'detailView__type',
+          innerText: type.type.name
+        });
+        appendElement(detailViewTypes, [detailViewType]);
+      });
+
+      const detailViewStats = createElement('div', {
+        className: 'detailView__stats'
+      });
+
+      pokemon.stats.forEach(stat => {
+        const detailViewStatRow = createElement('div', {
+          className: 'detailView__row'
+        });
+
+        const detailViewStatName = createElement('div', {
+          className: 'detailView__stat',
+          innerText: stat.stat.name
+        });
+
+        const detailViewStatBar = createElement('div', {
+          className: 'detailView__statBar'
+        });
+
+        const detailViewStatBarFilled = createElement('div', {
+          className: 'detailView__statBarFilled',
+          innerText: stat.base_stat
+        });
+        detailViewStatBarFilled.style.width = stat.base_stat + 'px';
+        appendElement(detailViewStatBar, [detailViewStatBarFilled]);
+        appendElement(detailViewStatRow, [
+          detailViewStatName,
+          detailViewStatBar
+        ]);
+        appendElement(detailViewStats, [detailViewStatRow]);
+      });
+
+      const detailViewMoves = createElement('div', {
+        className: 'detailView__moves',
+        innerText: 'Moves: '
+      });
+
+      pokemon.moves.forEach(move => {
+        const detailViewMove = createElement('div', {
+          className: 'detailView__move',
+          innerText: move.move.name
+        });
+        appendElement(detailViewMoves, [detailViewMove]);
+      });
+
+      appendElement(detailView, [
+        detailViewTitleBar,
+        detailViewTypes,
+        detailViewStats,
+        detailViewMoves
+      ]);
+      document.body.appendChild(detailView);
+    }
+
+    openDetailView(pokemonID);
+
     function filterResults(searchQuery, pokemonData) {
       // Get Pokemon names
 
