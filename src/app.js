@@ -97,13 +97,11 @@ export function app() {
     function filterResults(searchQuery, pokemonData) {
       // Get Pokemon names
 
-      const filteredPokemons = [];
-      pokemonData.forEach(pokemon => {
+      const filteredPokemons = pokemonData.filter(pokemon => {
         const pokemonName = pokemon.name;
-        if (pokemonName.toLowerCase().startsWith(searchQuery.toLowerCase())) {
-          filteredPokemons.push(pokemon);
-        }
+        return pokemonName.toLowerCase().startsWith(searchQuery.toLowerCase());
       });
+
       return filteredPokemons;
     }
   }
