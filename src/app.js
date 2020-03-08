@@ -95,16 +95,15 @@ export function app() {
           searchResultImageWrapper
         ]);
 
-        searchResult.addEventListener('click', event => {
+        searchResult.addEventListener('click', async function() {
           const pokemonID = event.target.dataset.pokemonid;
-          openDetailView(pokemonID);
+          await openDetailView(pokemonID);
         });
         appendElement(searchResultsWrapper, [searchResult]);
       });
     });
 
     async function openDetailView(pokemonID) {
-      console.log(pokemonID);
       const url = 'https://pokeapi.co/api/v2/pokemon/' + pokemonID + '/';
       const response = await fetch(url);
       const pokemon = await response.json();
