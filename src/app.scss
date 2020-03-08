@@ -1,0 +1,32 @@
+@use './lib/theme.scss';
+
+/* Header */
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: theme.$secondary-bg-color;
+  color: theme.$alternate-color;
+  padding: 1em 0em;
+}
+
+.header__logo {
+  height: 53px;
+  margin: 0 0.5em;
+}
+
+.header__title {
+  margin: 0;
+  padding-top: 7px;
+  font-family: 'Spartan', sans-serif;
+}
+
+/* Main */
+
+.main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0em 0.5em;
+}

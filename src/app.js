@@ -1,5 +1,7 @@
 import { createElement, appendElement, removeAllChilds } from './lib/util';
 import Logo from './assets/img/logo.png';
+import './app.scss';
+import './components/search.scss';
 
 export function app() {
   async function fetchPokemons() {
