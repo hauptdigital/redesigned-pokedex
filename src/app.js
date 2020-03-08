@@ -1,12 +1,13 @@
 import { createElement, appendElement, removeAllChilds } from './lib/util';
 import Logo from './assets/img/logo.png';
+import CloseButtonX from './assets/img/close-24px.svg';
 import './app.scss';
 import './components/search.scss';
 import './components/detailview.scss';
 
 export function app() {
   async function fetchPokemons() {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=5');
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
     const results = await response.json();
     const pokemons = await results.results;
 
@@ -93,17 +94,30 @@ export function app() {
           searchResultTitle,
           searchResultImageWrapper
         ]);
+
+        searchResult.addEventListener('click', event => {
+          const pokemonID = event.target.dataset.pokemonid;
+          openDetailView(pokemonID);
+        });
         appendElement(searchResultsWrapper, [searchResult]);
       });
     });
 
-    const pokemonID = '125';
     async function openDetailView(pokemonID) {
+      console.log(pokemonID);
       const url = 'https://pokeapi.co/api/v2/pokemon/' + pokemonID + '/';
       const response = await fetch(url);
       const pokemon = await response.json();
 
       // Build detail view
+      const detailViewCloseButton = createElement('div', {
+        className: 'detailView__closeButton'
+      });
+      const detailViewCloseButtonImage = createElement('img', {
+        className: 'detailView_closeButtonImage',
+        src: CloseButtonX
+      });
+      appendElement(detailViewCloseButton, [detailViewCloseButtonImage]);
       const detailViewImageWrapper = createElement('div', {
         className: 'detailViewImageWrapper'
       });
@@ -218,11 +232,31 @@ export function app() {
         detailViewStats,
         detailViewMoves
       ]);
-      appendElement(detailViewContainer, [detailView, detailViewImageWrapper]);
+      appendElement(detailViewContainer, [
+        detailView,
+        detailViewImageWrapper,
+        detailViewCloseButton
+      ]);
       document.body.insertBefore(detailViewContainer, header);
-    }
+      setTimeout(function() {
+        detailViewContainer.classList.add('active');
+        detailView.style.top = '50%';
+      }, 200);
+      setTimeout(function() {
+        detailViewImage.style.top = '17%';
+      }, 400);
 
-    openDetailView(pokemonID);
+      detailViewCloseButton.addEventListener('click', event => {
+        setTimeout(function() {
+          detailViewContainer.classList.remove('active');
+          detailView.style.top = '100%';
+          detailViewImage.style.top = '-100%';
+        }, 200);
+        setTimeout(function() {
+          detailViewContainer.remove();
+        }, 500);
+      });
+    }
 
     function filterResults(searchQuery, pokemonData) {
       // Get Pokemon names
