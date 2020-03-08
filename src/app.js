@@ -95,7 +95,7 @@ export function app() {
           searchResultImageWrapper
         ]);
 
-        searchResult.addEventListener('click', async function() {
+        searchResult.addEventListener('click', async event => {
           const pokemonID = event.target.dataset.pokemonid;
           await openDetailView(pokemonID);
         });
@@ -245,7 +245,7 @@ export function app() {
         detailViewImage.style.top = '17%';
       }, 400);
 
-      detailViewCloseButton.addEventListener('click', event => {
+      detailViewCloseButton.addEventListener('click', function() {
         setTimeout(function() {
           detailViewContainer.classList.remove('active');
           detailView.style.top = '100%';
