@@ -21,8 +21,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
-  margin-left: -0.5%;
-  margin-right: -0.5%;
+  margin-left: -5px;
+  margin-right: -5px;
 }
 
 .searchResultsWrapper__searchResult {
@@ -60,22 +60,22 @@
 @media only screen and (max-width: 600px) {
   .searchResultsWrapper__searchResult {
     flex-basis: 100%;
-    margin: 0.5em 0;
+    margin: 5px;
   }
 }
 
 /* Tablet */
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
   .searchResultsWrapper__searchResult {
-    flex-basis: calc(97% / 3);
-    margin: 0.5em 0.5%;
+    flex-basis: calc(100% / 3 - 10px);
+    margin: 5px;
   }
 }
 
 /* Desktop */
 @media only screen and (min-width: 1025px) {
   .searchResultsWrapper__searchResult {
-    flex-basis: calc(96% / 4);
-    margin: 0.5em 0.5%;
+    flex-basis: calc(100% / 4 - 10px);
+    margin: 5px;
   }
 }
