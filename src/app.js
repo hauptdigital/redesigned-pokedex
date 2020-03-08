@@ -154,6 +154,13 @@ export function app() {
         className: 'detailView__stats'
       });
 
+      const detailViewStatsTitle = createElement('div', {
+        className: 'detailView__statsTitle',
+        innerText: 'Stats'
+      });
+
+      appendElement(detailViewStats, [detailViewStatsTitle]);
+
       pokemon.stats.forEach(stat => {
         const detailViewStatRow = createElement('div', {
           className: 'detailView__row'
@@ -172,7 +179,7 @@ export function app() {
           className: 'detailView__statBarFilled',
           innerText: stat.base_stat
         });
-        detailViewStatBarFilled.style.width = stat.base_stat + 'px';
+        detailViewStatBarFilled.style.width = stat.base_stat * 2 + 'px';
         appendElement(detailViewStatBar, [detailViewStatBarFilled]);
         appendElement(detailViewStatRow, [
           detailViewStatName,
@@ -182,8 +189,18 @@ export function app() {
       });
 
       const detailViewMoves = createElement('div', {
-        className: 'detailView__moves',
-        innerText: 'Moves: '
+        className: 'detailView__moves'
+      });
+
+      const detailViewMovesTitle = createElement('div', {
+        className: 'detailView__movesTitle',
+        innerText: 'Moves'
+      });
+
+      appendElement(detailViewMoves, [detailViewMovesTitle]);
+
+      const detailViewMovesWrapper = createElement('div', {
+        className: 'detailViewMovesWrapper'
       });
 
       pokemon.moves.forEach(move => {
@@ -191,8 +208,9 @@ export function app() {
           className: 'detailView__move',
           innerText: move.move.name
         });
-        appendElement(detailViewMoves, [detailViewMove]);
+        appendElement(detailViewMovesWrapper, [detailViewMove]);
       });
+      appendElement(detailViewMoves, [detailViewMovesWrapper]);
 
       appendElement(detailView, [
         detailViewTitleBar,
@@ -200,10 +218,8 @@ export function app() {
         detailViewStats,
         detailViewMoves
       ]);
-
+      appendElement(detailViewContainer, [detailView, detailViewImageWrapper]);
       document.body.insertBefore(detailViewContainer, header);
-      document.body.insertBefore(detailView, header);
-      document.body.insertBefore(detailViewImageWrapper, header);
     }
 
     openDetailView(pokemonID);
