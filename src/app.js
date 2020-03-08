@@ -2,6 +2,7 @@ import { createElement, appendElement, removeAllChilds } from './lib/util';
 import Logo from './assets/img/logo.png';
 import './app.scss';
 import './components/search.scss';
+import './components/detailview.scss';
 
 export function app() {
   async function fetchPokemons() {
@@ -96,13 +97,25 @@ export function app() {
       });
     });
 
-    const pokemonID = '2';
+    const pokemonID = '125';
     async function openDetailView(pokemonID) {
       const url = 'https://pokeapi.co/api/v2/pokemon/' + pokemonID + '/';
       const response = await fetch(url);
       const pokemon = await response.json();
 
       // Build detail view
+      const detailViewImageWrapper = createElement('div', {
+        className: 'detailViewImageWrapper'
+      });
+      const detailViewImage = createElement('img', {
+        className: 'detailViewImage',
+        src:
+          'https://pokeres.bastionbot.org/images/pokemon/' + pokemon.id + '.png'
+      });
+      appendElement(detailViewImageWrapper, [detailViewImage]);
+      const detailViewContainer = createElement('div', {
+        className: 'detailViewContainer'
+      });
       const detailView = createElement('div', {
         className: 'detailView'
       });
@@ -120,9 +133,14 @@ export function app() {
       appendElement(detailViewTitleBar, [detailViewNumber, detailViewTitle]);
 
       const detailViewTypes = createElement('div', {
-        className: 'detailView__types',
+        className: 'detailView__types'
+      });
+
+      const detailViewTypesTitle = createElement('div', {
+        className: 'detailView__typesTitle',
         innerText: 'Types: '
       });
+      appendElement(detailViewTypes, [detailViewTypesTitle]);
 
       pokemon.types.forEach(type => {
         const detailViewType = createElement('div', {
@@ -182,7 +200,10 @@ export function app() {
         detailViewStats,
         detailViewMoves
       ]);
-      document.body.appendChild(detailView);
+
+      document.body.insertBefore(detailViewContainer, header);
+      document.body.insertBefore(detailView, header);
+      document.body.insertBefore(detailViewImageWrapper, header);
     }
 
     openDetailView(pokemonID);
