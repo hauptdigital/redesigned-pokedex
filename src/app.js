@@ -95,9 +95,9 @@ export function app() {
           searchResultImageWrapper
         ]);
 
-        searchResult.addEventListener('click', async event => {
-          const pokemonID = event.target.dataset.pokemonid;
-          await openDetailView(pokemonID);
+        searchResult.addEventListener('click', () => {
+          const pokemonID = searchResult.dataset.pokemonid;
+          openDetailView(pokemonID);
         });
         appendElement(searchResultsWrapper, [searchResult]);
       });
