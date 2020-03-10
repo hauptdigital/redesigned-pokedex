@@ -8,7 +8,9 @@ module.exports = {
      new CleanWebpackPlugin(),
      new HtmlWebpackPlugin({
        title: 'Redesigned Pokédex',
-     }),
+       'meta': {
+         'viewport': 'width=device-width, initial-scale=1, shrink-to-fit=no'
+     }})
    ],
   output: {
     filename: 'main.js',

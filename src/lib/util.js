@@ -25,3 +25,12 @@ export function removeAllChilds(node) {
 
   return node;
 }
+
+export function waitFor(time) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve();
+      console.log('Waited for ' + time);
+    }, time);
+  });
+}
