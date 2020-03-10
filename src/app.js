@@ -9,7 +9,8 @@ export function app() {
   async function fetchPokemons() {
     const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
     const results = await response.json();
-    const pokemons = await results.results;
+
+    const pokemons = results.results;
 
     const pokemonData = [];
 
@@ -64,7 +65,17 @@ export function app() {
       const input = event.target;
       const searchQuery = input.value;
 
+      // Loading message
+      removeAllChilds(searchResultsWrapper);
+
+      const message = createElement('div', {
+        className: 'message',
+        innerText: 'loading...'
+      });
+      searchResultsWrapper.appendChild(message);
+
       // Get Data
+
       const pokemonData = await fetchPokemons();
 
       // Filter results
@@ -72,6 +83,14 @@ export function app() {
 
       // Create search results
       removeAllChilds(searchResultsWrapper);
+
+      if (filteredPokemons.length === 0) {
+        const message = createElement('div', {
+          className: 'message',
+          innerText: 'No Pokemon found :('
+        });
+        searchResultsWrapper.appendChild(message);
+      }
 
       filteredPokemons.forEach(pokemon => {
         const searchResult = createElement('div', {
@@ -242,7 +261,8 @@ export function app() {
         detailView.style.top = '50%';
       }, 200);
       setTimeout(function() {
-        detailViewImage.style.top = '17%';
+        detailViewImage.style.bottom = '45%';
+        detailViewImage.style.top = 'initial';
       }, 400);
 
       detailViewCloseButton.addEventListener('click', function() {
